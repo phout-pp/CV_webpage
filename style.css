@@ -1,0 +1,19 @@
+/* ใส่ในไฟล์ style.css ถ้าต้องการเพิ่มความ Smooth นอกเหนือจาก Tailwind */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ปรับแต่ง Scrollbar ให้ดู Minimal */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
