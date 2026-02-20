@@ -17,7 +17,8 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        /* เพิ่มฟอนต์จีน (PingFang SC, Microsoft YaHei) ไว้สำรองเพื่อให้ตัวอักษรจีนสวยงาม */
+        body { font-family: 'Plus Jakarta Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
         
         /* Light Mode Glass */
         .glass-card { 
@@ -26,7 +27,7 @@
             border: 1px solid rgba(255, 255, 255, 0.3); 
         }
 
-        /* 2. Added Dark Mode Glass */
+        /* Dark Mode Glass */
         .dark .glass-card {
             background: rgba(30, 41, 59, 0.6); /* Slate-800 with opacity */
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -34,26 +35,31 @@
     </style>
     
     <script>
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark').matches)) {
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
     } else {
         document.documentElement.classList.remove('dark');
     }
     </script>
 </head>
-<!-- Nav bar -->
 <body class="bg-[#f8fafc] text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
     
     <nav class="fixed w-full z-50 backdrop-blur-lg bg-white/60 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">PHOUTSATHONE<span class="text-blue-600">.</span></div>
+            <div class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">PHOUTSATHONE<span class="text-blue-600">.</span></div>
             <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600 dark:text-slate-300 items-center">
-                <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition">About</a>
-                <a href="#experience" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Experience</a>
-                <a href="#education" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Education</a>
-                <a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Skills</a>
-                <a href="#contact" class="text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 px-4 py-2 rounded-full hover:bg-blue-50 dark:hover:bg-slate-800 transition">Get In Touch</a>
+                <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition" data-i18n="nav_about">About</a>
+                <a href="#experience" class="hover:text-blue-600 dark:hover:text-blue-400 transition" data-i18n="nav_exp">Experience</a>
+                <a href="#education" class="hover:text-blue-600 dark:hover:text-blue-400 transition" data-i18n="nav_edu">Education</a>
+                <a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400 transition" data-i18n="nav_skills">Skills</a>
+                <a href="#contact" class="text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 px-4 py-2 rounded-full hover:bg-blue-50 dark:hover:bg-slate-800 transition" data-i18n="nav_contact">Get In Touch</a>
                 
+                <div class="flex items-center space-x-2 border-l border-slate-300 dark:border-slate-700 pl-4">
+                    <button onclick="changeLanguage('en')" class="text-xs font-bold hover:text-blue-600 dark:hover:text-blue-400 transition">EN</button>
+                    <span class="text-slate-300 dark:text-slate-600">|</span>
+                    <button onclick="changeLanguage('zh')" class="text-xs font-bold hover:text-blue-600 dark:hover:text-blue-400 transition">中文</button>
+                </div>
+
                 <button id="theme-toggle" class="p-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm transition-colors">
                     <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -61,24 +67,24 @@
             </div>
         </div>
     </nav>
-<!-- About section -->
-    <section id="about" class="min-h-screen flex items-center justify-center px-6 pt-20">
+
+<section id="about" class="min-h-screen flex items-center justify-center px-6 pt-20">
         <div class="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
             
             <div class="text-left order-2 md:order-1">
-                <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase bg-blue-50 dark:bg-slate-800 rounded-full" data-aos="fade-right">
+                <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase bg-blue-50 dark:bg-slate-800 rounded-full" data-aos="fade-right" data-i18n="hero_tag">
                     Engineering & Researcher
                 </span>
                 <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-slate-900 dark:text-white" data-aos="fade-up">
-                    Hi, I'm Phoutsathone. <br>
+                    <span data-i18n="hero_hi">Hi, I'm Phoutsathone. <br></span>
                     <span id="typed" style="font-size: xx-large;" class="text-blue-600 dark:text-blue-400"></span>
                 </h1>
-                <p class="text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-i18n="hero_desc">
                     <strong>Technician and Purchase Manager</strong> at VAST, currently specializing in <strong>Communication Engineering</strong> at ZSTU. I combine aviation supply expertise with advanced technical skills in C++ and EM simulation to modernize.
                 </p>
                 <div class="flex gap-4" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#" class="px-6 py-3 bg-slate-900 dark:bg-blue-600 text-white rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-blue-700 transition shadow-xl">Download CV</a>
-                    <a href="#contact" class="px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">Contact Me</a>
+                    <a href="#" class="px-6 py-3 bg-slate-900 dark:bg-blue-600 text-white rounded-xl font-bold hover:bg-slate-800 dark:hover:bg-blue-700 transition shadow-xl" data-i18n="btn_cv">Download CV</a>
+                    <a href="#contact" class="px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition" data-i18n="btn_contact">Contact Me</a>
                 </div>
             </div>
 
@@ -92,20 +98,20 @@
 
         </div>
     </section>
-<!-- Experience section -->
-    <section id="experience" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+
+<section id="experience" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-5xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-16 text-center text-slate-900 dark:text-white">Professional Journey</h2>
+            <h2 class="text-3xl font-bold mb-16 text-center text-slate-900 dark:text-white" data-i18n="exp_title">Professional Journey</h2>
             <div class="space-y-12">
                 <div class="glass-card p-8 rounded-3xl group hover:border-blue-200 dark:hover:border-blue-800 transition" data-aos="fade-right">
                     <div class="flex flex-col md:flex-row md:justify-between mb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white">Technician & Co-Founder</h3>
-                            <p class="text-slate-600 dark:text-slate-300 font-semibold">Viengkham Aviation Supplying and Trading (VAST) | Vientiane, LAOS</p>
+                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white" data-i18n="exp_role1">Technician & Co-Founder</h3>
+                            <p class="text-slate-600 dark:text-slate-300 font-semibold" data-i18n="exp_comp1">Viengkham Aviation Supplying and Trading (VAST) | Vientiane, LAOS</p>
                         </div>
-                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0">2023-2025</span>
+                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0" data-i18n="exp_date1">2023-2025</span>
                     </div>
-                    <p class="text-slate-500 dark:text-slate-400">
+                    <p class="text-slate-500 dark:text-slate-400" data-i18n="exp_desc1">
                         <b>Technical Operations:</b> Conduct technical inspections and maintenance of aviation parts to ensure compliance with industry safety standards. <br>
                         <b>Strategic Procurement:</b> Lead the sourcing and acquisition of specialized aviation equipment from international suppliers, optimizing the supply chain for the family business. <br>
                         <b>Project Management:</b> Oversee logistics and inventory management, ensuring seamless delivery of critical components to clients.
@@ -114,21 +120,21 @@
             </div>
         </div>
     </section>
-<!-- Education section -->
-    <section id="education" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+
+<section id="education" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-5xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-16 text-center text-slate-900 dark:text-white">Education</h2>
+            <h2 class="text-3xl font-bold mb-16 text-center text-slate-900 dark:text-white" data-i18n="edu_title">Education</h2>
             <div class="space-y-12">
                 
                 <div class="glass-card p-8 rounded-3xl group hover:border-blue-200 dark:hover:border-blue-800 transition" data-aos="fade-right">
                     <div class="flex flex-col md:flex-row md:justify-between mb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white">M.Sc. Communication Engineering</h3>
-                            <p class="text-slate-600 dark:text-slate-300 font-semibold">Zhejiang Sci-Tech University (ZSTU) | Hangzhou, China</p>
+                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white" data-i18n="edu_role1">M.Sc. Communication Engineering</h3>
+                            <p class="text-slate-600 dark:text-slate-300 font-semibold" data-i18n="edu_comp1">Zhejiang Sci-Tech University (ZSTU) | Hangzhou, China</p>
                         </div>
-                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0">2025 – Present</span>
+                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0" data-i18n="edu_date1">2025 – Present</span>
                     </div>
-                    <p class="text-slate-500 dark:text-slate-400">
+                    <p class="text-slate-500 dark:text-slate-400" data-i18n="edu_desc1">
                         <b>Key Coursework:</b> Antenna Theory & Design, Signals and Systems, EM Waves, C++ for Engineering. <br>
                         <b>Research Focus:</b> Electromagnetic simulation and hardware design under the supervision of Prof. Zhang Yijia.
                     </p>
@@ -137,12 +143,12 @@
                 <div class="glass-card p-8 rounded-3xl group hover:border-blue-200 dark:hover:border-blue-800 transition" data-aos="fade-left">
                     <div class="flex flex-col md:flex-row md:justify-between mb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white">B.Eng. Computer Engineering</h3>
-                            <p class="text-slate-600 dark:text-slate-300 font-semibold">National University of Laos (NUOL) | Vientiane, LAOS</p>
+                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white" data-i18n="edu_role2">B.Eng. Computer Engineering</h3>
+                            <p class="text-slate-600 dark:text-slate-300 font-semibold" data-i18n="edu_comp2">National University of Laos (NUOL) | Vientiane, LAOS</p>
                         </div>
-                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0">2019 – 2023</span>
+                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0" data-i18n="edu_date2">2019 – 2023</span>
                     </div>
-                    <p class="text-slate-500 dark:text-slate-400">
+                    <p class="text-slate-500 dark:text-slate-400" data-i18n="edu_desc2">
                         <b>Core Focus:</b> Network architecture, hardware-software integration, and systems programming. <br>
                         <b>Programming Foundation:</b> Developed advanced proficiency in C++ and Python, forming the basis for current engineering automation projects.
                     </p>
@@ -151,12 +157,12 @@
                 <div class="glass-card p-8 rounded-3xl group hover:border-blue-200 dark:hover:border-blue-800 transition" data-aos="fade-right">
                     <div class="flex flex-col md:flex-row md:justify-between mb-4">
                         <div>
-                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white">G-DORM Exchange Program</h3>
-                            <p class="text-slate-600 dark:text-slate-300 font-semibold">Niigata University | Faculty of Engineering, Japan</p>
+                            <h3 class="text-2xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition text-slate-900 dark:text-white" data-i18n="edu_role3">G-DORM Exchange Program</h3>
+                            <p class="text-slate-600 dark:text-slate-300 font-semibold" data-i18n="edu_comp3">Niigata University | Faculty of Engineering, Japan</p>
                         </div>
-                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0">2021 – 2022 </span>
+                        <span class="text-sm font-bold text-slate-400 mt-2 md:mt-0" data-i18n="edu_date3">2021 – 2022</span>
                     </div>
-                    <p class="text-slate-500 dark:text-slate-400">
+                    <p class="text-slate-500 dark:text-slate-400" data-i18n="edu_desc3">
                         <b>Certificate of Participation & Completion:</b> Engaged in cross-cultural, collaborative engineering problem-solving with international teams. <br>
                         <b>Key Focus:</b> Developed communication and teamwork skills in a global engineering context.
                     </p>
@@ -165,17 +171,16 @@
         </div>
     </section>
 
-<!-- Skill section -->
-    <section id="skills" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+<section id="skills" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col md:flex-row gap-16">
                 
                 <div class="md:w-1/2">
-                    <h2 class="text-3xl font-extrabold mb-8 text-slate-900 dark:text-white" data-aos="fade-right">Technical <span class="text-blue-600 dark:text-blue-400">Engineering</span></h2>
+                    <h2 class="text-3xl font-extrabold mb-8 text-slate-900 dark:text-white" data-aos="fade-right" data-i18n="skill_title">Technical <span class="text-blue-600 dark:text-blue-400">Engineering</span></h2>
                     <div class="space-y-6">
                         <div data-aos="fade-right" data-aos-delay="100">
                             <div class="flex justify-between mb-2">
-                                <span class="font-bold text-slate-700 dark:text-slate-200">C++ / Communication Engineering</span>
+                                <span class="font-bold text-slate-700 dark:text-slate-200" data-i18n="skill_1">C++ / Communication Engineering</span>
                                 <span class="text-slate-400">75%</span>
                             </div>
                             <div class="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -185,7 +190,7 @@
                         
                         <div data-aos="fade-right" data-aos-delay="200">
                             <div class="flex justify-between mb-2">
-                                <span class="font-bold text-slate-700 dark:text-slate-200">CST Studio Suit design Antenna </span>
+                                <span class="font-bold text-slate-700 dark:text-slate-200" data-i18n="skill_2">CST Studio Suit design Antenna</span>
                                 <span class="text-slate-400">15%</span>
                             </div>
                             <div class="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -195,7 +200,7 @@
 
                         <div data-aos="fade-right" data-aos-delay="300">
                             <div class="flex justify-between mb-2">
-                                <span class="font-bold text-slate-700 dark:text-slate-200">SolidWorks & 3D Modeling</span>
+                                <span class="font-bold text-slate-700 dark:text-slate-200" data-i18n="skill_3">SolidWorks & 3D Modeling</span>
                                 <span class="text-slate-400">90%</span>
                             </div>
                             <div class="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -206,50 +211,50 @@
                 </div>
 
                 <div class="md:w-1/2">
-                    <h2 class="text-3xl font-extrabold mb-8 text-slate-900 dark:text-white" data-aos="fade-left">Business <span class="text-blue-600 dark:text-blue-400">Expertise</span></h2>
+                    <h2 class="text-3xl font-extrabold mb-8 text-slate-900 dark:text-white" data-aos="fade-left" data-i18n="biz_title">Business <span class="text-blue-600 dark:text-blue-400">Expertise</span></h2>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="p-6 border border-slate-100 dark:border-slate-800 rounded-2xl bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:shadow-lg transition duration-300" data-aos="zoom-in">
                             <div class="text-blue-600 dark:text-blue-400 mb-3">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                             </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white">Procurement</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Aviation supply chain & trading management.</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="biz_1">Procurement</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2" data-i18n="biz_1_desc">Aviation supply chain & trading management.</p>
                         </div>
 
                         <div class="p-6 border border-slate-100 dark:border-slate-800 rounded-2xl bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:shadow-lg transition duration-300" data-aos="zoom-in" data-aos-delay="100">
                             <div class="text-blue-600 dark:text-blue-400 mb-3">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1h6.5a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
                             </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white">Logistics</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Cross-border logistics between China & Laos.</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="biz_2">Logistics</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2" data-i18n="biz_2_desc">Cross-border logistics between China & Laos.</p>
                         </div>
 
                         <div class="p-6 border border-slate-100 dark:border-slate-800 rounded-2xl bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:shadow-lg transition duration-300" data-aos="zoom-in" data-aos-delay="200">
                             <div class="text-blue-600 dark:text-blue-400 mb-3">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
                             </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white">International</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Fluent communication in Lao, Thai, English and Chinese.</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="biz_3">International</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2" data-i18n="biz_3_desc">Fluent communication in Lao, Thai, English and Chinese.</p>
                         </div>
 
                         <div class="p-6 border border-slate-100 dark:border-slate-800 rounded-2xl bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:shadow-lg transition duration-300" data-aos="zoom-in" data-aos-delay="300">
                             <div class="text-blue-600 dark:text-blue-400 mb-3">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                             </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white">Innovation</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Integrating AI & Modern JS into business workflows.</p>
+                            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="biz_4">Innovation</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2" data-i18n="biz_4_desc">Integrating AI & Modern JS into business workflows.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<!-- contact section -->
-    <section id="contact" class="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+
+<section id="contact" class="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold mb-4 text-slate-900 dark:text-white" data-aos="fade-up">Get In Touch</h2>
-                <p class="text-slate-500 dark:text-slate-400" data-aos="fade-up" data-aos-delay="100">Feel free to reach out for business inquiries or academic collaborations.</p>
+                <h2 class="text-4xl font-extrabold mb-4 text-slate-900 dark:text-white" data-aos="fade-up" data-i18n="contact_title">Get In Touch</h2>
+                <p class="text-slate-500 dark:text-slate-400" data-aos="fade-up" data-aos-delay="100" data-i18n="contact_desc">Feel free to reach out for business inquiries or academic collaborations.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -261,7 +266,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Email</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white" data-i18n="contact_email">Email</h3>
                     <p class="text-slate-500 dark:text-slate-400 text-xs break-all">phoutsathone.ls@gmail.com</p>
                 </a>
 
@@ -273,7 +278,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">WhatsApp</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white" data-i18n="contact_wa">WhatsApp</h3>
                     <p class="text-slate-500 dark:text-slate-400 text-sm">+856 20 5898 9161</p>
                 </a>
 
@@ -284,7 +289,7 @@
                             <path d="M19 14.2c0-3.4-2.8-6.2-6.2-6.2s-6.2 2.8-6.2 6.2c0 .9.2 1.7.5 2.5l-1.1 2.3c-.2.5.1 1.1.6 1.3.5.2 1.1-.1 1.3-.6l.7-1.4c.9.5 1.9.8 3 1 .2.3.5.5.8.7l-.5 1.1c-.2.5.1 1.1.6 1.3s1.1-.1 1.3-.6l.6-1.1c.3.1.6.1.9.1 1 0 1.9-.3 2.7-.7l.7 1.4c.2.5.8.7 1.3.5.5-.2.7-.8.5-1.3l-.5-1.1c1.2-.5 2.2-1.4 2.8-2.6.5-.8.8-1.7.8-2.7zM12 10c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
                          </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">QQ</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white" data-i18n="contact_qq">QQ</h3>
                     <p class="text-slate-500 dark:text-slate-400 text-sm">3858790844</p> 
                 </div>
 
@@ -295,8 +300,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Location</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">Nongteng, Sikottabong, Vientiane, Lao PDR</p>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white" data-i18n="contact_loc">Location</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm" data-i18n="contact_loc_desc">Nongteng, Sikottabong, Vientiane, Lao PDR</p>
                 </div>
             </div>
         </div>
@@ -306,31 +311,139 @@
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // Typed.js Implementation
-        new Typed('#typed', {
-            strings: ['Aviation Solutions.', 'Future Networks.', 'Innovative Trading.'],
-            typeSpeed: 50,
-            backSpeed: 30,
-            loop: true
-        });
-        
+        /* =============================
+           1. ข้อมูลสำหรับระบบแปลภาษา (Translations Data)
+           ============================= */
+        const translations = {
+            en: {
+                nav_about: "About", nav_exp: "Experience", nav_edu: "Education", nav_skills: "Skills", nav_contact: "Get In Touch",
+                hero_tag: "Engineering & Researcher",
+                hero_hi: "Hi, I'm Phoutsathone. <br>",
+                hero_desc: "<strong>Technician and Purchase Manager</strong> at VAST, currently specializing in <strong>Communication Engineering</strong> at ZSTU. I combine aviation supply expertise with advanced technical skills in C++ and EM simulation to modernize.",
+                btn_cv: "Download CV", btn_contact: "Contact Me",
+                exp_title: "Professional Journey",
+                exp_role1: "Technician & Co-Founder",
+                exp_comp1: "Viengkham Aviation Supplying and Trading (VAST) | Vientiane, LAOS",
+                exp_date1: "2023-2025",
+                exp_desc1: "<b>Technical Operations:</b> Conduct technical inspections and maintenance of aviation parts to ensure compliance with industry safety standards. <br><b>Strategic Procurement:</b> Lead the sourcing and acquisition of specialized aviation equipment from international suppliers, optimizing the supply chain for the family business. <br><b>Project Management:</b> Oversee logistics and inventory management, ensuring seamless delivery of critical components to clients.",
+                edu_title: "Education",
+                edu_role1: "M.Sc. Communication Engineering",
+                edu_comp1: "Zhejiang Sci-Tech University (ZSTU) | Hangzhou, China",
+                edu_date1: "2025 – Present",
+                edu_desc1: "<b>Key Coursework:</b> Antenna Theory & Design, Signals and Systems, EM Waves, C++ for Engineering. <br><b>Research Focus:</b> Electromagnetic simulation and hardware design under the supervision of Prof. Zhang Yijia.",
+                edu_role2: "B.Eng. Computer Engineering",
+                edu_comp2: "National University of Laos (NUOL) | Vientiane, LAOS",
+                edu_date2: "2019 – 2023",
+                edu_desc2: "<b>Core Focus:</b> Network architecture, hardware-software integration, and systems programming. <br><b>Programming Foundation:</b> Developed advanced proficiency in C++ and Python, forming the basis for current engineering automation projects.",
+                edu_role3: "G-DORM Exchange Program",
+                edu_comp3: "Niigata University | Faculty of Engineering, Japan",
+                edu_date3: "2021 – 2022",
+                edu_desc3: "<b>Certificate of Participation & Completion:</b> Engaged in cross-cultural, collaborative engineering problem-solving with international teams. <br><b>Key Focus:</b> Developed communication and teamwork skills in a global engineering context.",
+                skill_title: "Technical <span class='text-blue-600 dark:text-blue-400'>Engineering</span>",
+                skill_1: "C++ / Communication Engineering",
+                skill_2: "CST Studio Suit design Antenna",
+                skill_3: "SolidWorks & 3D Modeling",
+                biz_title: "Business <span class='text-blue-600 dark:text-blue-400'>Expertise</span>",
+                biz_1: "Procurement", biz_1_desc: "Aviation supply chain & trading management.",
+                biz_2: "Logistics", biz_2_desc: "Cross-border logistics between China & Laos.",
+                biz_3: "International", biz_3_desc: "Fluent communication in Lao, Thai, English and Chinese.",
+                biz_4: "Innovation", biz_4_desc: "Integrating AI & Modern JS into business workflows.",
+                contact_title: "Get In Touch",
+                contact_desc: "Feel free to reach out for business inquiries or academic collaborations.",
+                contact_email: "Email", contact_wa: "WhatsApp", contact_qq: "QQ", contact_loc: "Location",
+                contact_loc_desc: "Nongteng, Sikottabong, Vientiane, Lao PDR"
+            },
+            zh: {
+                nav_about: "关于我", nav_exp: "工作经验", nav_edu: "教育背景", nav_skills: "专业技能", nav_contact: "联系我",
+                hero_tag: "工程师与研究员",
+                hero_hi: "你好，我是 Phoutsathone。<br>",
+                hero_desc: "VAST <strong>技术员兼采购经理</strong>，目前在浙江理工大学 (ZSTU) 攻读<strong>通信工程</strong>硕士。我将航空供应链的专业知识与 C++ 和电磁仿真的先进技术相结合，以推动业务现代化。",
+                btn_cv: "下载简历", btn_contact: "联系我",
+                exp_title: "职业历程",
+                exp_role1: "技术员兼联合创始人",
+                exp_comp1: "万象航空供应与贸易 (VAST) | 老挝，万象",
+                exp_date1: "2023 - 2025",
+                exp_desc1: "<b>技术运营：</b>对航空零件进行技术检查和维护，以确保符合行业安全标准。<br><b>战略采购：</b>负责从国际供应商处采购专业航空设备，优化家族企业的供应链。<br><b>项目管理：</b>监督物流和库存管理，确保关键部件无缝交付给客户。",
+                edu_title: "教育背景",
+                edu_role1: "通信工程 硕士",
+                edu_comp1: "浙江理工大学 (ZSTU) | 中国，杭州",
+                edu_date1: "2025 – 至今",
+                edu_desc1: "<b>主要课程：</b>天线理论与设计、信号与系统、电磁波、工程 C++。<br><b>研究方向：</b>在张一佳（Zhang Yijia）教授的指导下进行电磁仿真与硬件设计。",
+                edu_role2: "计算机工程 学士",
+                edu_comp2: "老挝国立大学 (NUOL) | 老挝，万象",
+                edu_date2: "2019 – 2023",
+                edu_desc2: "<b>核心方向：</b>网络架构、软硬件集成和系统编程。<br><b>编程基础：</b>熟练掌握 C++ 和 Python，为当前的工程自动化项目奠定了基础。",
+                edu_role3: "G-DORM 交换生项目",
+                edu_comp3: "新泻大学 | 日本，工程学院",
+                edu_date3: "2021 – 2022",
+                edu_desc3: "<b>参与和结业证书：</b>与国际团队一起参与跨文化、协作性的工程问题解决。<br><b>主要重点：</b>在全球工程背景下培养沟通和团队合作能力。",
+                skill_title: "工程 <span class='text-blue-600 dark:text-blue-400'>技术</span>",
+                skill_1: "C++ / 通信工程",
+                skill_2: "CST Studio Suite 天线设计",
+                skill_3: "SolidWorks & 3D 建模",
+                biz_title: "商业 <span class='text-blue-600 dark:text-blue-400'>专长</span>",
+                biz_1: "采购", biz_1_desc: "航空供应链及贸易管理。",
+                biz_2: "物流", biz_2_desc: "中国与老挝之间的跨境物流。",
+                biz_3: "国际化", biz_3_desc: "流利使用老挝语、泰语、英语和中文进行沟通。",
+                biz_4: "创新", biz_4_desc: "将 AI 和现代 JS 技术集成到业务工作流中。",
+                contact_title: "联系我",
+                contact_desc: "欢迎随时联系我，探讨业务合作或学术交流。",
+                contact_email: "电子邮件", contact_wa: "WhatsApp", contact_qq: "QQ", contact_loc: "地址",
+                contact_loc_desc: "老挝万象市，Sikottabong，Nongteng"
+            }
+        };
+
+        const typedStrings = {
+            en: ['Aviation Solutions.', 'Future Networks.', 'Innovative Trading.'],
+            zh: ['航空解决方案', '未来网络', '创新贸易']
+        };
+
+        /* =============================
+           2. ระบบ Typed.js และสลับภาษา
+           ============================= */
+        let typedInstance = null;
+
+        function changeLanguage(lang) {
+            // บันทึกการตั้งค่าภาษาลงในเครื่องผู้ใช้
+            localStorage.setItem('pref-lang', lang);
+            
+            // เปลี่ยนข้อความใน HTML ที่มี data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // รีเซ็ต Typed.js ให้พิมพ์ภาษาใหม่
+            if (typedInstance) {
+                typedInstance.destroy();
+            }
+            typedInstance = new Typed('#typed', {
+                strings: typedStrings[lang],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true
+            });
+        }
+
+        /* =============================
+           3. ระบบ Dark Mode (แบบเดิมของคุณ)
+           ============================= */
         const themeToggleBtn = document.getElementById('theme-toggle');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Check theme on load
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark').matches)) {
+        if (document.documentElement.classList.contains('dark')) {
             lightIcon.classList.remove('hidden');
         } else {
             darkIcon.classList.remove('hidden');
         }
 
         themeToggleBtn.addEventListener('click', function() {
-            // Toggle Icons
             darkIcon.classList.toggle('hidden');
             lightIcon.classList.toggle('hidden');
 
-            // Toggle Mode & Local Storage
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
@@ -338,6 +451,12 @@
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('color-theme', 'dark');
             }
+        });
+
+        // ทำงานเมื่อโหลดหน้าเว็บเสร็จ (ดึงภาษาและสีมาแสดง)
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('pref-lang') || 'en';
+            changeLanguage(savedLang);
         });
     </script>
     
